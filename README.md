@@ -18,6 +18,7 @@ build application with javafx.
   - 이 클래스들은 모두 추상 클래스로 실제로 사용하게 될 'Label', 'Rectangle' 클래스들은 이들을 상속받은 클래스다.
 
 **FXML**
+
 - FXML에서 클래스의 이름은 각 XML 요소의 이름에 해당한다. 이를 사용하기 위해서는 `<?import ...?>` 처럼 클래스를 import 할 필요가 있다.
 - 노드의 크기는 루트 요소의 컨테이너 레이아웃에 의해 결정되며 루트 요소는 prefWidth, prefHeight 속성으로 크기를 지정할 수 있다.
 - SceneBuilder에서 루트 요소를 'wrap-in'하면 새로운 컨테이너로 루트 요소를 씌움으로써 루트 요소의 타입을 바꿀 수 있다(ex: AnchorPane -> VBox).
@@ -48,3 +49,61 @@ build application with javafx.
 - 연결된 변수들은 Document의 'Controller' 설정에서 확인할 수 있다.
 - 예를 들어 Button 같은 요소에 이벤트 핸들러를 적용하려면 'On Action' 속성의 드롭 다운 바를 클릭하여 '@FXML' 어노테이션이 붙은 함수 중 적절한 함수를 해당 컨트롤의 이벤트 핸들러로 적용할 수 있다.
 
+### [ Day 3 ]
+
+**JavaFX**
+
+- 메뉴 아이템 글자에 '_'를 붙임으로써 해당 글자를 단축키(Alt 키와 같이 누를 수 있는 것), mnemonic으로 활용할 수 있다.
+- 메뉴에 하위 메뉴를 추가하려면 MenuItem이 아닌 이의 하위 클래스인 Menu 클래스를 사용해야 한다.
+- 메뉴 아이템은 일반 항목 말고도 분리자, 라디오 버튼, 커스텀 메뉴 아이템을 추가할 수 있다.
+- 메뉴에 아이템을 등록한 후에는 이벤트 처리를 위해 ActionEvent 객체를 등록해주어야 한다. 이벤트 핸들러는 다음과 같이 구축할 수 있다.
+
+```Java
+menuItem.setOnAction(new EventHandler<ActionEvent>() {
+	@Override
+	public void handle(ActionEvent t){
+		// application exit
+		Platform.exit();
+	}
+})
+```
+
+- 키보드 단축키를 사용하여 이벤트를 발생시킬 수 있으며 다음과 같이 구축할 수 있다.
+
+```java
+menuItem.setAccelerator(KeyCombination.keyCombination("Ctrl+X"));
+menuItem.setOnAction(new EventHandler<ActionEvent>()) { ... }
+```
+
+- 팝업 메뉴를 사용하려면 ContextMenu 클래스를 활용할 수 있다. Menu와 마찬가지로 MenuItem을 추가할 수 있다.
+- 팝업 메뉴를 표시하기 위해서는 show() 메소드를 호출해줘야 하기 때문에 마우스 오른쪽 클릭 등의 이벤트 처리기에서 팝업 메뉴를 표시해줘야 한다.
+- 팝업 메뉴(ContextMenu) 객체를 생성, MenuItem들을 포함시킨 후 팝업 메뉴를 표시하고자 하는 객체(예시에서는 MenuBar 인스턴스 bar)의 이벤트 핸들러를 다음과 같이 표시해준다.
+
+```
+bar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	@Override
+	public void handle(MouseEvent event){
+		// if mouse right button clicked
+		if (event.getButton() == MouseButton.SECONDARY) {
+			popup.show(bar, event.getScreenX(), event.getScreenY());
+		}
+	}
+})
+```
+
+- 팝업 메뉴의 show() 메소드는 인수에 따라 여러 종류가 있을 수 있으며 위의 경우 팝업 메뉴의 부모가 되는 노드 컨트롤 객체와 출력 좌표를 지정하고 있다.
+- 만약 컨트롤(라벨, 버튼 등)에서 팝업 메뉴를 표시할 경우 Control 클래스의 contextMenu 속성을 사용하여 다음과 같이 ContextMenu 객체를 지정해 줄 수 있다.
+
+```
+bar.setContextMenu(contextMenu);
+```
+
+- 이외의 
+
+**FXML**
+
+- FXML을 사용하여 메뉴 아이템 등에 이벤트 핸들러를 등록하려면 컨트롤러 클래스에서 정의해줘야 한다.
+- 동일하게 @FXML 어노테이션을 사용하여 이벤트 처리기를 작성한 후 SceneBuilder에서 이전의 버튼 예제처럼 onAction 속성값에 연결해주면 된다.
+
+- 팝업 메뉴를 FXML에서 지정하려면 ContextMenu 아이템을 사용할 수 있다.
+-  
