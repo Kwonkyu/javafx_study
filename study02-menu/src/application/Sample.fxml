@@ -4,24 +4,24 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.BoxBlur?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu text="_File">
             <items>
                   <MenuItem mnemonicParsing="false" text="Open" />
-           		  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Close" />
+           		  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <Menu mnemonicParsing="false" text="Recent">
                     <items>
@@ -32,7 +32,7 @@
           </Menu>
           <Menu text="_Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Clear" />
             </items>
           </Menu>
           <Menu text="_Help">
@@ -41,19 +41,12 @@
             </items>
           </Menu>
         </menus>
-         <contextMenu>
-            <ContextMenu fx:id="popup">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-              </items>
-            </ContextMenu>
-         </contextMenu>
       </MenuBar>
    </top>
    <center>
-      <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbox" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
@@ -61,7 +54,7 @@
                   <BoxBlur />
                </effect>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
                      <effect>
@@ -70,15 +63,30 @@
                   </Circle>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="48.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="48.0" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../image.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="300.0" pickOnBounds="true" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="70.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imageView2" fitHeight="100.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="180.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imageView3" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <ScrollPane>
+               <content>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imageView4" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </center>

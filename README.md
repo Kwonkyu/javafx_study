@@ -102,11 +102,16 @@ bar.setContextMenu(contextMenu);
 - 이미지를 표시하려면 `javafx.scene.image.Image` 클래스나 `javafx.scene.image.ImageView` 같은 클래스를 활용할 수 있다. 전자는 이미지 자체의 내용을 담는 클래스이며 후자는 이미지를 표시하기 위한 노드에 해당한다.
 
 ```
-Image image = new Image(getClass().getResource("duke.jpg").toString());
+Image image = new Image(getClass().getResource("duke.jpg").toString()); // 단순히 FileInputStream으로도 가능
 ImageView view = new ImageView(image);
 ```
 
-- 
+- 이미지가 너무 커서 윈도우에서 수용이 불가능할경우 이미지 크기를 조정하거나 스크롤 막대 등을 활용하는 방법이 있다.
+  - 먼저 이미지 크기 조정을 위해 ImageView 클래스의 fitWidth, fitHeight 속성을 사용할 수 있다.
+    - 이는 이미지의 비율을 고려하지 않고 지정된 크기로 축소시키기 때문에 이를 방지하기 위해 preserveRatio 속성을 설정할 수 있다.
+    - fitWidth, fitHeight가 0이라면 이미지의 원래 크기로 표시하게 된다.
+  - 다음으로 ScrollPane 클래스를 활용하여 원본 이미지를 스크롤하면서 볼 수 있도록 한다.
+    - ScrollPane 객체에 대하여 setContent() 메소드에 ImageView를 넘기거나 FXML로 정의할 수 있다.
 
 **FXML**
 
@@ -114,4 +119,6 @@ ImageView view = new ImageView(image);
 - 동일하게 @FXML 어노테이션을 사용하여 이벤트 처리기를 작성한 후 SceneBuilder에서 이전의 버튼 예제처럼 onAction 속성값에 연결해주면 된다.
 
 - 팝업 메뉴를 FXML에서 지정하려면 ContextMenu 아이템을 사용할 수 있다.
+- SceneBuilder에서 ContextMenu의 MenuItem을 클릭하면 프로그램이 멈추는 현상이 발생한다. 직접 FXML을 수정하거나 주의해서 사용할 것.
 - 이미지를 FXML에서 나타내려면 ImageView에서 Image 속성에 이미지를 지정할 수 있다. 이 경우 Image 요소의 url에 "@duke.jpg" 처럼 '@'가 붙은 값이 주어지는데 이는 위의 Java 코드에서 getResource() 메소드로 URL을 취득하는 과정과 동일하다고 할 수 있다.
+- 
