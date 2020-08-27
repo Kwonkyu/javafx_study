@@ -98,7 +98,15 @@ bar.setOnMouseClicked(new EventHandler<MouseEvent>() {
 bar.setContextMenu(contextMenu);
 ```
 
-- 이외의 
+- 이외의 요소(VBox 등)에서 팝업 메뉴를 위한 이벤트 핸들러를 등록하기 위해 컨트롤러에서 Initializable 인터페이스를 구현, initialize() 메소드를 통해 핸들러를 구현할 수 있다. 이 경우 @FXML 어노테이션으로 코드와 요소가 연결되어 있어야 한다.
+- 이미지를 표시하려면 `javafx.scene.image.Image` 클래스나 `javafx.scene.image.ImageView` 같은 클래스를 활용할 수 있다. 전자는 이미지 자체의 내용을 담는 클래스이며 후자는 이미지를 표시하기 위한 노드에 해당한다.
+
+```
+Image image = new Image(getClass().getResource("duke.jpg").toString());
+ImageView view = new ImageView(image);
+```
+
+- 
 
 **FXML**
 
@@ -106,4 +114,4 @@ bar.setContextMenu(contextMenu);
 - 동일하게 @FXML 어노테이션을 사용하여 이벤트 처리기를 작성한 후 SceneBuilder에서 이전의 버튼 예제처럼 onAction 속성값에 연결해주면 된다.
 
 - 팝업 메뉴를 FXML에서 지정하려면 ContextMenu 아이템을 사용할 수 있다.
--  
+- 이미지를 FXML에서 나타내려면 ImageView에서 Image 속성에 이미지를 지정할 수 있다. 이 경우 Image 요소의 url에 "@duke.jpg" 처럼 '@'가 붙은 값이 주어지는데 이는 위의 Java 코드에서 getResource() 메소드로 URL을 취득하는 과정과 동일하다고 할 수 있다.
