@@ -61,7 +61,16 @@
 - PropertyValueFactory는 두 개의 제너릭 매개변수를 받는데 전자는 Java Beans의 유형, 후자는 테이블에 표시할 데이터 형식을 의미한다.
 - 이전과 비슷하게 ObservableList 객체에 대하여 setItems() 메소드로 항목을 지정해줄 수 있다.
 
+- 테이블의 데이터를 편집시키려면 ListView 때처럼 편집 가능한 셀을 지정 및 편집이 완료됐을 때 이벤트 처리를 통해 변경사항을 반영해야 한다.
+  - 테이블은 `javafx.scene.control.TableCell`을 이용해 셀을 표현한다.
+  - 테이블의 편집가능한 셀은 `TextFieldTableCell.forTableColumn()`을 활용하여 팩토리를 받는다.
+  - 테이블의 편집에서 발생하는 이벤트는 `TableColumn.CellEditEvent`다. 
+- 만약 셀의 데이터가 문자열이 아닐 경우(정수 등) 편집 시 형태가 달라질 수 있다. 이를 처리하려면 문자열로 표시하는 형식 변환기를 지정해야 하는데 `javafx.util.StringConverter` 클래스를 구현한 클래스의 객체를 팩토리 생성 시 매개변수로 전달하여 사용할 수 있다.
 
+```
+		Callback<TableColumn<Album, Integer>, TableCell<Album, Integer>> factory =
+        		TextFieldTableCell.forTableColumn(new IntegerStringConverter());
+```
 
 **FXML**
 

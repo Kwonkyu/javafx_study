@@ -18,15 +18,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ListView.EditEvent;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 
@@ -54,6 +54,7 @@ public class Main extends Application {
 			ObservableList<IDS> IDSItems = FXCollections.observableArrayList(new IDS("Snort", 9.7, true),
 					new IDS("Suricata", 8.8, true), new IDS("Custom IDS", 0.0, false));
 			TableView<IDS> tableView = new TableView<IDS>();
+			tableView.setEditable(true);
 			// generic type for table view and type of items in cell.
 			TableColumn<IDS, String> nameColumn = new TableColumn<>("name");
 			TableColumn<IDS, String> resultColumn = new TableColumn<>("result");
@@ -146,6 +147,18 @@ public class Main extends Application {
 			resultColumn.setCellValueFactory(new PropertyValueFactory<IDS, String>("result"));
 			isActiveColumn.setCellValueFactory(new PropertyValueFactory<IDS, String>("active"));
 			tableView.setItems(IDSItems);
+			
+			Callback<TableColumn<IDS, String>, TableCell<IDS, String>> nameFactory = TextFieldTableCell.forTableColumn();
+			nameColumn.setCellFactory(nameFactory);
+			nameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<IDS,String>>() {
+
+				@Override
+				public void handle(CellEditEvent<IDS, String> event) {
+					// TODO Auto-generated method stub
+					IDS newIDS = (IDS)event.getTableView().getItems().get(event.getTablePosition().getRow());
+					newIDS.setName(event.getNewValue());
+				}
+			});
 			
 			Scene scene = new Scene(root,0,0);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
