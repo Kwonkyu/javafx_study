@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+
+<BorderPane prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="application.SampleController">
+   <center>
+      <VBox alignment="CENTER" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Slider fx:id="sliderR" max="255.0" showTickLabels="true" showTickMarks="true" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="182.0">
+               <children>
+                  <Slider fx:id="sliderG" max="255.0" showTickLabels="true" showTickMarks="true" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="227.0">
+               <children>
+                  <Slider fx:id="sliderB" max="255.0" showTickLabels="true" showTickMarks="true" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="sliderLabel" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="270.0">
+               <children>
+                  <Circle fx:id="circle" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="258.0">
+               <children>
+                  <Slider fx:id="sliderProgress" blockIncrement="0.01" max="1.0" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="293.0">
+               <children>
+                  <ProgressBar fx:id="progressBar" maxWidth="120.0" HBox.hgrow="SOMETIMES" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="326.0">
+               <children>
+                  <TextArea fx:id="textArea1" prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="textArea2" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="287.0">
+               <children>
+                  <Circle fx:id="circleBound" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
